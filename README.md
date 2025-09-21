@@ -1,19 +1,18 @@
 # codemate_ai_hackathon
 
-
-
 # 🚀 Deep Research Agent
 
 ### Next-Gen AI Research & Document Analysis
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Issues](https://img.shields.io/github/issues/your_username/your_repo_name)](https://github.com/your_username/your_repo_name/issues)
-[![Forks](https://img.shields.io/github/forks/your_username/your_repo_name)](https://github.com/your_username/your_repo_name/fork)
+[![Issues](https://img.shields.io/github/issues/your_username/your_repo_name)](https://github.com/shubhamiit9162/codemate_ai_hackathon/issues)
+[![Forks](https://img.shields.io/github/forks/your_username/your_repo_name)](https://github.com/shubhamiit9162/codemate_ai_hackathon/fork)
 
 An intelligent agent designed to perform deep analysis on a collection of documents, synthesizing information and extracting key findings in response to a user's query.
 
-![Deep Research Agent UI](https://i.imgur.com/G4xS5k0.jpeg)
-*Image shows the main interface after a research query has been completed.*
+![Deep Research Agent UI](./assests/5.png)
+![Deep Research Agent UI](./assests/6.png)
+_Image shows the main interface after a research query has been completed._
 
 ---
 
@@ -29,13 +28,13 @@ This project was built to empower researchers, students, and professionals to fi
 
 ## 🎯 Key Features
 
-* **🧠 AI-Powered Analysis:** Leverages advanced AI models to understand context and synthesize information across multiple sources.
-* **📂 Drag & Drop Document Upload:** Easily upload your source files (`.txt`, `.md`, etc.) through an intuitive interface.
-* **📝 Automated Summarization:** Generates a high-level Executive Summary from the most relevant findings.
-* **🔑 Key Finding Extraction:** Pinpoints and presents specific, crucial pieces of information, citing the source document for each.
-* **📊 Detailed Analytics:** Provides insights into the analysis process, including the number of documents analyzed, relevance scores, and the search strategy used.
-* **🔒 High-Confidence Results:** Utilizes a "Super Confidence Agent" to ensure the generated information is comprehensive and reliable.
-* ** sleek, Modern UI:** A clean and responsive user interface built for a seamless user experience.
+- **🧠 AI-Powered Analysis:** Leverages advanced AI models to understand context and synthesize information across multiple sources.
+- **📂 Drag & Drop Document Upload:** Easily upload your source files (`.txt`, `.md`, etc.) through an intuitive interface.
+- **📝 Automated Summarization:** Generates a high-level Executive Summary from the most relevant findings.
+- **🔑 Key Finding Extraction:** Pinpoints and presents specific, crucial pieces of information, citing the source document for each.
+- **📊 Detailed Analytics:** Provides insights into the analysis process, including the number of documents analyzed, relevance scores, and the search strategy used.
+- **🔒 High-Confidence Results:** Utilizes a "Super Confidence Agent" to ensure the generated information is comprehensive and reliable.
+- ** sleek, Modern UI:** A clean and responsive user interface built for a seamless user experience.
 
 ---
 
@@ -44,16 +43,18 @@ This project was built to empower researchers, students, and professionals to fi
 This project is built with a modern tech stack. While the exact stack is up to the developer, a typical implementation might look like this:
 
 **Frontend:**
-* [React](https://reactjs.org/) or [Vue.js](https://vuejs.org/)
-* [Tailwind CSS](https://tailwindcss.com/) for styling
-* [Vite](https://vitejs.dev/) for the build tool
+
+- [React](https://reactjs.org/) or [Vue.js](https://vuejs.org/)
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [Vite](https://vitejs.dev/) for the build tool
 
 **Backend:**
-* [Python](https://www.python.org/)
-* [FastAPI](https://fastapi.tiangolo.com/) or [Flask](https://flask.palletsprojects.com/) for the web server
-* [LangChain](https://www.langchain.com/) or a similar framework for orchestrating AI agents and models
-* [Hugging Face Transformers](https://huggingface.co/docs/transformers/index) for NLP models
-* Vector Database (e.g., [ChromaDB](https://www.trychroma.com/), [FAISS](https://github.com/facebookresearch/faiss)) for semantic search
+
+- [Python](https://www.python.org/)
+- [FastAPI](https://fastapi.tiangolo.com/) or [Flask](https://flask.palletsprojects.com/) for the web server
+- [LangChain](https://www.langchain.com/) or a similar framework for orchestrating AI agents and models
+- [Hugging Face Transformers](https://huggingface.co/docs/transformers/index) for NLP models
+- Vector Database (e.g., [ChromaDB](https://www.trychroma.com/), [FAISS](https://github.com/facebookresearch/faiss)) for semantic search
 
 ---
 
@@ -63,41 +64,44 @@ To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
 
-* Python 3.9+
-* Node.js and npm (or yarn)
-* An API key from an AI provider (e.g., OpenAI, Google, Anthropic)
+- Python 3.9+
+- Node.js and npm (or yarn)
+- An API key from an AI provider (e.g., OpenAI, Google, Anthropic)
 
 ### Installation
 
 1.  **Clone the repository:**
+
     ```sh
     git clone [https://github.com/your_username/your_repo_name.git](https://github.com/your_username/your_repo_name.git)
     cd your_repo_name
     ```
 
 2.  **Setup the Backend (Python):**
-    * Create and activate a virtual environment:
-        ```sh
-        python -m venv venv
-        source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-        ```
-    * The backend logic, which uses standard libraries like `os` for handling file paths and environment variables, can be set up by installing dependencies:
-        ```sh
-        pip install -r requirements.txt
-        ```
+
+    - Create and activate a virtual environment:
+      ```sh
+      python -m venv venv
+      source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+      ```
+    - The backend logic, which uses standard libraries like `os` for handling file paths and environment variables, can be set up by installing dependencies:
+      ```sh
+      pip install -r requirements.txt
+      ```
 
 3.  **Setup the Frontend:**
+
     ```sh
     cd frontend
     npm install
     ```
 
 4.  **Configure Environment Variables:**
-    * Create a `.env` file in the root directory.
-    * Add your API keys and other configurations:
-        ```
-        AI_PROVIDER_API_KEY="your_api_key_here"
-        ```
+    - Create a `.env` file in the root directory.
+    - Add your API keys and other configurations:
+      ```
+      AI_PROVIDER_API_KEY="your_api_key_here"
+      ```
 
 ### Running the Application
 
@@ -124,11 +128,11 @@ To get a local copy up and running, follow these simple steps.
 
 ## 🗺️ Roadmap
 
-* [ ] Support for more document types (PDF, DOCX, URL).
-* [ ] User authentication and saved research history.
-* [ ] Option to select different AI models or agents.
-* [ ] Export results to PDF or Markdown.
-* [ ] "System Stats" page with performance metrics.
+- [ ] Support for more document types (PDF, DOCX, URL).
+- [ ] User authentication and saved research history.
+- [ ] Option to select different AI models or agents.
+- [ ] Export results to PDF or Markdown.
+- [ ] "System Stats" page with performance metrics.
 
 See the [open issues](https://github.com/your_username/your_repo_name/issues) for a full list of proposed features (and known issues).
 
@@ -158,4 +162,4 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Your Name - [@shubhs9162](https://twitter.com/your_twitter_handle) - shubhs9162@gmail.com
 
-Project Link: [https://github.com/your_username/your_repo_name](https://github.com/shubhamiit9162/codemate_ai_hackathon)
+Project Link: [https://github.com/shubhamiit9162/codemate_ai_hackathon](https://github.com/shubhamiit9162/codemate_ai_hackathon)
