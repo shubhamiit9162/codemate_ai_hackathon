@@ -156,6 +156,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## 📧 Contact
 
-Your Name - [@your_twitter_handle](https://twitter.com/your_twitter_handle) - your.email@example.com
+Your Name - [@shubhs9162](https://twitter.com/your_twitter_handle) - shubhs9162@gmail.com
 
-Project Link: [https://github.com/your_username/your_repo_name](https://github.com/your_username/your_repo_name)
+Project Link: [https://github.com/your_username/your_repo_name](https://github.com/shubhamiit9162/codemate_ai_hackathon)
