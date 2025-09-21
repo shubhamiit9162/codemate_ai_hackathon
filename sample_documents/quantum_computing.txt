@@ -1,0 +1,17 @@
+
+Introduction to Quantum Computing
+
+Quantum computing harnesses quantum mechanical phenomena to process information in fundamentally different ways than classical computers. Unlike classical bits that exist in states of 0 or 1, quantum bits (qubits) can exist in superposition states.
+
+Key principles:
+- Superposition: qubits can be in multiple states simultaneously
+- Entanglement: qubits can be correlated in quantum mechanical ways
+- Quantum interference: amplifying correct answers and canceling incorrect ones
+
+Applications:
+- Cryptography and security
+- Drug discovery and molecular simulation
+- Financial modeling and optimization
+- Machine learning and AI
+
+Current quantum computers are noisy intermediate-scale quantum (NISQ) devices. Major challenges include quantum error correction, scalability, and developing practical quantum algorithms. Companies like IBM, Google, and others are making significant investments in quantum technology development.

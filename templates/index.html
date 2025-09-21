@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deep Research Agent - Advanced AI Interface</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #667eea;
+        --secondary: #764ba2;
+        --accent: #f093fb;
+        --success: #4ecdc4;
+        --warning: #feca57;
+        --danger: #ff6b6b;
+        --dark: #2c3e50;
+        --light: #ffffff;
+        --glass-bg: rgba(255, 255, 255, 0.08);
+        --glass-border: rgba(255, 255, 255, 0.18);
+        --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4ecdc4);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        min-height: 100vh;
+        color: #000000;
+        overflow-x: hidden;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Header */
+      .header {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+      .header h1 {
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        font-weight: 900;
+        background: linear-gradient(135deg, #ffffff, #f093fb, #667eea);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: textFloat 6s ease-in-out infinite;
+      }
+      @keyframes textFloat {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .header p {
+        font-size: 1.3rem;
+        font-weight: 300;
+        opacity: 0.9;
+      }
+
+      /* Glass Cards */
+      .glass-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: var(--shadow-glass);
+      }
+
+      .section-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        position: relative;
+      }
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+      }
+
+      /* Form */
+      .search-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .search-input,
+      .agent-selector {
+        padding: 15px 20px;
+        border-radius: 12px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        font-size: 1rem;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+      }
+      .search-input::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+      .search-input:focus,
+      .agent-selector:focus {
+        border-color: var(--accent);
+        outline: none;
+      }
+      .search-controls {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 14px 28px;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+      }
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      /* Loading */
+      .loading {
+        text-align: center;
+        color: var(--accent);
+        display: none;
+      }
+      .spinner {
+        border: 4px solid rgba(255, 255, 255, 0.2);
+        border-top: 4px solid var(--accent);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 15px;
+      }
+      @keyframes spin {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Results */
+      .results-section {
+        display: none;
+      }
+      .confidence-bar {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        height: 16px;
+      }
+      .confidence-fill {
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          var(--danger),
+          var(--warning),
+          var(--success)
+        );
+        width: 0;
+        border-radius: 10px;
+        transition: width 0.4s;
+      }
+      .finding-item {
+        background: rgba(255, 255, 255, 0.1);
+        border-left: 4px solid var(--primary);
+        padding: 10px;
+        border-radius: 8px;
+        margin: 10px 0;
+      }
+
+      /* Upload */
+      .upload-area {
+        border: 3px dashed var(--primary);
+        border-radius: 12px;
+        padding: 30px;
+        text-align: center;
+        cursor: pointer;
+      }
+      .upload-area.dragover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: var(--accent);
+      }
+
+      .error-message {
+        background: rgba(255, 0, 0, 0.2);
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 10px;
+      }
+      .success-message {
+        background: rgba(0, 255, 0, 0.2);
+        padding: 10px;
+        border-radius: 8px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🔬 Deep Research Agent</h1>
+        <p>Next-Gen AI Research & Document Analysis</p>
+      </div>
+
+      <!-- Search -->
+      <div class="glass-card">
+        <h2 class="section-title">Research Query</h2>
+        <form class="search-form" id="searchForm">
+          <input
+            type="text"
+            class="search-input"
+            id="queryInput"
+            placeholder="Enter your research question..."
+            required
+          />
+          <div class="search-controls">
+            <select class="agent-selector" id="agentSelector">
+              <option value="standard">Standard Agent</option>
+              <option value="super">Super Confidence Agent</option>
+            </select>
+            <button type="submit" class="btn btn-primary" id="searchBtn">
+              🔍 Research
+            </button>
+            <button type="button" class="btn btn-secondary" id="statsBtn">
+              📊 System Stats
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Loading -->
+      <div class="loading" id="loadingSection">
+        <div class="spinner"></div>
+        <p>Analyzing documents and generating insights...</p>
+      </div>
+
+      <!-- Results -->
+      <div class="glass-card results-section" id="resultsSection">
+        <h2 class="section-title">Research Results</h2>
+        <p><strong>Query:</strong> <span id="resultQuery"></span></p>
+        <p><strong>Agent:</strong> <span id="resultAgent"></span></p>
+        <p><strong>Confidence:</strong> <span id="confidenceScore"></span></p>
+        <div class="confidence-bar">
+          <div class="confidence-fill" id="confidenceFill"></div>
+        </div>
+        <button class="btn btn-secondary" id="exportBtn">
+          📄 Export Report
+        </button>
+
+        <h3 class="section-title">Executive Summary</h3>
+        <div id="executiveSummary"></div>
+        <h3 class="section-title">Key Findings</h3>
+        <div id="keyFindings"></div>
+        <h3 class="section-title">Detailed Analysis</h3>
+        <div id="detailedAnalysis"></div>
+        <h3 class="section-title">Sources</h3>
+        <div id="sources"></div>
+      </div>
+
+      <!-- Upload -->
+      <div class="glass-card">
+        <h2 class="section-title">Upload Documents</h2>
+        <div class="upload-area" id="uploadArea">
+          📎 Drag & Drop .txt files or click to select
+          <input
+            type="file"
+            id="fileInput"
+            multiple
+            accept=".txt"
+            style="display: none"
+          />
+        </div>
+        <div id="uploadStatus"></div>
+      </div>
+
+      <!-- Stats -->
+      <div class="glass-card results-section" id="statsSection">
+        <h2 class="section-title">System Statistics</h2>
+        <div class="stats-grid" id="statsGrid"></div>
+      </div>
+    </div>
+
+    <script>
+      const API_BASE = "";
+      const searchForm = document.getElementById("searchForm"),
+        queryInput = document.getElementById("queryInput"),
+        agentSelector = document.getElementById("agentSelector"),
+        searchBtn = document.getElementById("searchBtn"),
+        statsBtn = document.getElementById("statsBtn"),
+        loadingSection = document.getElementById("loadingSection"),
+        resultsSection = document.getElementById("resultsSection"),
+        statsSection = document.getElementById("statsSection"),
+        exportBtn = document.getElementById("exportBtn"),
+        uploadArea = document.getElementById("uploadArea"),
+        fileInput = document.getElementById("fileInput"),
+        uploadStatus = document.getElementById("uploadStatus");
+
+      let currentReport = null;
+
+      // Search
+      searchForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        await performResearch();
+      });
+      async function performResearch() {
+        const query = queryInput.value.trim(),
+          agentType = agentSelector.value;
+        if (!query) return;
+        showLoading();
+        hideResults();
+        try {
+          const res = await fetch(`${API_BASE}/api/research`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ query, agent_type: agentType }),
+          });
+          const data = await res.json();
+          if (res.ok) {
+            currentReport = data;
+            displayResults(data);
+          } else showError(data.error || "Research failed");
+        } catch (err) {
+          showError("Network error: " + err.message);
+        } finally {
+          hideLoading();
+        }
+      }
+      function displayResults(data) {
+        document.getElementById("resultQuery").textContent = data.query;
+        document.getElementById("resultAgent").textContent =
+          data.agent_type === "super"
+            ? "Super Confidence Agent"
+            : "Standard Agent";
+        document.getElementById("confidenceScore").textContent = `${(
+          data.confidence_score * 100
+        ).toFixed(1)}%`;
+        document.getElementById("confidenceFill").style.width = `${
+          data.confidence_score * 100
+        }%`;
+        document.getElementById(
+          "executiveSummary"
+        ).innerHTML = `<p>${data.executive_summary}</p>`;
+        document.getElementById("keyFindings").innerHTML = data.key_findings
+          .map((f) => `<div class="finding-item">${f}</div>`)
+          .join("");
+        document.getElementById(
+          "detailedAnalysis"
+        ).innerHTML = `<pre>${data.detailed_analysis}</pre>`;
+        document.getElementById("sources").innerHTML = data.sources
+          .map((s, i) => `<div class="finding-item">${i + 1}. ${s}</div>`)
+          .join("");
+        showResults();
+      }
+
+      // Stats
+      statsBtn.addEventListener("click", async () => {
+        try {
+          const res = await fetch(`${API_BASE}/api/stats`),
+            data = await res.json();
+          if (res.ok) {
+            displayStats(data);
+          } else showError(data.error || "Failed to load stats");
+        } catch (err) {
+          showError("Network error: " + err.message);
+        }
+      });
+      function displayStats(stats) {
+        document.getElementById("statsGrid").innerHTML = Object.entries(stats)
+          .map(
+            ([k, v]) =>
+              `<div class="finding-item"><b>${k
+                .replace(/_/g, " ")
+                .toUpperCase()}</b>: ${v}</div>`
+          )
+          .join("");
+        statsSection.style.display = "block";
+      }
+
+      // Export
+      exportBtn.addEventListener("click", async () => {
+        if (!currentReport) return;
+        try {
+          const res = await fetch(`${API_BASE}/api/export`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ report: currentReport }),
+          });
+          const data = await res.json();
+          if (res.ok) showSuccess(`Report exported: ${data.filename}`);
+          else showError(data.error || "Export failed");
+        } catch (err) {
+          showError("Network error: " + err.message);
+        }
+      });
+
+      // Upload
+      uploadArea.addEventListener("click", () => fileInput.click());
+      uploadArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        uploadArea.classList.add("dragover");
+      });
+      uploadArea.addEventListener("dragleave", () =>
+        uploadArea.classList.remove("dragover")
+      );
+      uploadArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove("dragover");
+        handleFiles(e.dataTransfer.files);
+      });
+      fileInput.addEventListener("change", (e) => handleFiles(e.target.files));
+
+      async function handleFiles(files) {
+        const formData = new FormData();
+        for (let f of files) {
+          if (f.name.endsWith(".txt")) formData.append("files", f);
+        }
+        if (formData.getAll("files").length === 0) {
+          showError("Please select .txt files only");
+          return;
+        }
+        try {
+          const res = await fetch(`${API_BASE}/api/upload`, {
+              method: "POST",
+              body: formData,
+            }),
+            data = await res.json();
+          if (res.ok) showSuccess(data.message);
+          else showError(data.error || "Upload failed");
+        } catch (err) {
+          showError("Network error: " + err.message);
+        }
+      }
+
+      // Utils
+      function showLoading() {
+        loadingSection.style.display = "block";
+        searchBtn.disabled = true;
+      }
+      function hideLoading() {
+        loadingSection.style.display = "none";
+        searchBtn.disabled = false;
+      }
+      function showResults() {
+        resultsSection.style.display = "block";
+      }
+      function hideResults() {
+        resultsSection.style.display = "none";
+        statsSection.style.display = "none";
+      }
+      function showError(msg) {
+        uploadStatus.innerHTML = `<div class="error-message">${msg}</div>`;
+        setTimeout(() => (uploadStatus.innerHTML = ""), 5000);
+      }
+      function showSuccess(msg) {
+        uploadStatus.innerHTML = `<div class="success-message">${msg}</div>`;
+        setTimeout(() => (uploadStatus.innerHTML = ""), 5000);
+      }
+
+      // Load stats on start
+      window.addEventListener("load", () => statsBtn.click());
+    </script>
+  </body>
+</html>

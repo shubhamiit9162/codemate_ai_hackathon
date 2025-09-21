@@ -1,0 +1,33 @@
+Quantum Computing Fundamentals
+
+Quantum computing harnesses quantum mechanical phenomena to process information in revolutionary ways. Unlike classical bits, quantum bits (qubits) can exist in superposition states.
+
+Core Principles:
+- Superposition: Qubits can be in multiple states simultaneously
+- Entanglement: Quantum particles become correlated
+- Quantum Interference: Amplifying correct solutions
+- Quantum Gates: Operations on qubits
+
+Key Advantages:
+- Exponential speedup for certain problems
+- Parallel processing capabilities
+- Cryptographic applications
+- Optimization problem solving
+
+Classical Computing vs Quantum Computing:
+Classical computers use bits that are either 0 or 1. Quantum computers use qubits that can be in superposition of both 0 and 1 simultaneously. This allows quantum computers to process exponentially more information than classical computers for certain types of problems.
+
+Current Challenges:
+- Quantum decoherence and error rates
+- Limited number of stable qubits
+- Need for extremely low temperatures
+- Complex programming requirements
+
+Applications:
+- Cryptography and security
+- Drug discovery and molecular simulation
+- Financial modeling
+- Weather prediction
+- Artificial intelligence enhancement
+
+Major players include IBM, Google, Microsoft, and various startups working on quantum hardware and software development.
