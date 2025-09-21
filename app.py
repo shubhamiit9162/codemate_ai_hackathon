@@ -8,14 +8,12 @@ from pathlib import Path
 from datetime import datetime
 import traceback
 
-# Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 CORS(app)
 
-# Global agent instances
 research_agent = None
 super_agent = None
 
@@ -24,19 +22,13 @@ def initialize_agents():
     global research_agent, super_agent
     
     try:
-        # Try to import your research agents
         from index import SimpleResearcherAgent
         logger.info("Successfully imported SimpleResearcherAgent")
-        
-        # Initialize standard agent
         research_agent = SimpleResearcherAgent()
-        
-        # Create and load sample documents
         sample_dir = research_agent.create_sample_documents()
         research_agent.load_documents_from_directory(str(sample_dir))
         logger.info("Standard research agent initialized successfully")
-        
-        # Try to initialize super agent
+
         try:
             from super_confidence_agent import SuperConfidenceAgent
             super_agent = SuperConfidenceAgent()
@@ -50,7 +42,6 @@ def initialize_agents():
         logger.error(f"Error initializing agents: {e}")
         logger.error(f"Traceback: {traceback.format_exc()}")
         
-        # Create fallback agent if main agents fail
         research_agent = create_fallback_agent()
         super_agent = research_agent
         logger.info("Using fallback agent due to initialization errors")
@@ -77,8 +68,7 @@ def create_fallback_agent():
                     'content': """Climate change refers to long-term shifts in global temperatures and weather patterns. Human activities are the primary driver since the mid-20th century, mainly through greenhouse gas emissions from fossil fuels, deforestation, and industrial processes. Observable effects include global temperature rise, melting ice caps, sea level rise, and extreme weather events. Over 97% of climate scientists agree that human activities are the primary cause of recent climate change."""
                 }
             ]
-            
-            # Create outputs directory
+
             self.outputs_dir = Path("outputs")
             self.outputs_dir.mkdir(exist_ok=True)
         
@@ -114,7 +104,6 @@ def create_fallback_agent():
             
             confidence = min(len(search_results) * 0.4, 1.0) if search_results else 0.0
             
-            # Create report object that matches expected structure
             class Report:
                 def __init__(self):
                     self.query = query
@@ -210,7 +199,6 @@ def research():
         
         logger.info(f"Processing research query: '{query}' with agent type: {agent_type}")
         
-        # Select agent
         if agent_type == 'super' and super_agent:
             agent = super_agent
         else:
@@ -218,11 +206,8 @@ def research():
         
         if not agent:
             return jsonify({'error': 'Research agent not available'}), 500
-        
-        # Perform research
         report = agent.research(query)
-        
-        # Convert to dict for JSON serialization
+
         response = {
             'query': report.query,
             'executive_summary': report.executive_summary,
@@ -272,8 +257,7 @@ def export_report():
         
         if not report_data:
             return jsonify({'error': 'Report data required'}), 400
-        
-        # Create a temporary report object
+ 
         class TempReport:
             def __init__(self, data):
                 self.query = data['query']
@@ -286,8 +270,7 @@ def export_report():
                 self.timestamp = data['timestamp']
         
         temp_report = TempReport(report_data)
-        
-        # Use available agent to export
+
         agent = research_agent
         if not agent:
             return jsonify({'error': 'No agent available'}), 500
@@ -321,8 +304,7 @@ def upload_documents():
                 file.save(str(filepath))
                 uploaded_count += 1
                 logger.info(f"Uploaded file: {file.filename}")
-        
-        # Try to reload documents in agents if they support it
+
         try:
             if research_agent and hasattr(research_agent, 'load_documents_from_directory'):
                 research_agent.load_documents_from_directory(str(upload_dir))
@@ -351,19 +333,16 @@ def internal_error(error):
 
 if __name__ == '__main__':
     try:
-        # Initialize agents on startup
         logger.info("Initializing research agents...")
         initialize_agents()
-        
-        # Verify agents are working
+
         if research_agent:
             try:
                 test_report = research_agent.research("test")
                 logger.info("Agent test successful")
             except Exception as e:
                 logger.warning(f"Agent test failed: {e}")
-        
-        # Run the app
+
         port = int(os.environ.get('PORT', 5000))
         logger.info(f"Starting Flask app on port {port}")
         app.run(host='0.0.0.0', port=port, debug=True)

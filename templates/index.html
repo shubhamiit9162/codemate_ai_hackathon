@@ -274,13 +274,11 @@
         </form>
       </div>
 
-      <!-- Loading -->
       <div class="loading" id="loadingSection">
         <div class="spinner"></div>
         <p>Analyzing documents and generating insights...</p>
       </div>
 
-      <!-- Results -->
       <div class="glass-card results-section" id="resultsSection">
         <h2 class="section-title">Research Results</h2>
         <p><strong>Query:</strong> <span id="resultQuery"></span></p>
@@ -303,7 +301,6 @@
         <div id="sources"></div>
       </div>
 
-      <!-- Upload -->
       <div class="glass-card">
         <h2 class="section-title">Upload Documents</h2>
         <div class="upload-area" id="uploadArea">
@@ -319,7 +316,6 @@
         <div id="uploadStatus"></div>
       </div>
 
-      <!-- Stats -->
       <div class="glass-card results-section" id="statsSection">
         <h2 class="section-title">System Statistics</h2>
         <div class="stats-grid" id="statsGrid"></div>
@@ -343,7 +339,6 @@
 
       let currentReport = null;
 
-      // Search
       searchForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         await performResearch();
@@ -398,7 +393,6 @@
         showResults();
       }
 
-      // Stats
       statsBtn.addEventListener("click", async () => {
         try {
           const res = await fetch(`${API_BASE}/api/stats`),
@@ -422,7 +416,6 @@
         statsSection.style.display = "block";
       }
 
-      // Export
       exportBtn.addEventListener("click", async () => {
         if (!currentReport) return;
         try {
@@ -439,7 +432,6 @@
         }
       });
 
-      // Upload
       uploadArea.addEventListener("click", () => fileInput.click());
       uploadArea.addEventListener("dragover", (e) => {
         e.preventDefault();
@@ -477,7 +469,6 @@
         }
       }
 
-      // Utils
       function showLoading() {
         loadingSection.style.display = "block";
         searchBtn.disabled = true;
@@ -502,7 +493,6 @@
         setTimeout(() => (uploadStatus.innerHTML = ""), 5000);
       }
 
-      // Load stats on start
       window.addEventListener("load", () => statsBtn.click());
     </script>
   </body>

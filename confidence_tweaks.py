@@ -1,19 +1,14 @@
-#!/usr/bin/env python3
-"""
-Confidence Optimization Tweaks - Adjust system parameters
-"""
-
 def get_optimized_confidence_settings():
     """Return optimized settings for higher confidence scores"""
     return {
-        'confidence_multiplier': 1.8,  # Boost confidence scores
-        'similarity_threshold': 0.15,  # Lower threshold to find more matches
-        'top_k_documents': 8,          # Search more documents
-        'max_findings': 8,             # Include more findings
-        'sentence_limit': 30,          # Check more sentences per document
-        'keyword_boost': 0.3,          # Boost keyword matches
-        'semantic_weight': 0.7,        # Balance semantic vs keyword search
-        'min_content_length': 50       # Minimum content length for findings
+        'confidence_multiplier': 1.8, 
+        'similarity_threshold': 0.15,  
+        'top_k_documents': 8,          
+        'max_findings': 8,             
+        'sentence_limit': 30,         
+        'keyword_boost': 0.3,          
+        'semantic_weight': 0.7,        
+        'min_content_length': 50       
     }
 
 def enhanced_research_function():
