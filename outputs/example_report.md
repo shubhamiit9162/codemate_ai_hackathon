@@ -1,6 +1,6 @@
 # Research Report: What is artificial intelligence?
 
-**Generated:** 2025-09-21T02:59:03.469797  
+**Generated:** 2025-09-21T06:05:04.174120  
 **Confidence Score:** 0.43
 
 ## Executive Summary
@@ -39,6 +39,6 @@ Performed semantic search across 3 documents. Found 3 relevant sources with aver
 
 ## Sources
 
-1. data/sample_documents/ai_overview.txt
-2. data/sample_documents/quantum_computing.txt
-3. data/sample_documents/climate_science.txt
+1. data/sample_documents/climate_science.txt
+2. data/sample_documents/ai_overview.txt
+3. data/sample_documents/quantum_computing.txt
